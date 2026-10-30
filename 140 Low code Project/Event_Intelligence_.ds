@@ -1,0 +1,1451 @@
+/*
+ * Author       : poojhaa.k.2024.aiml_rajal
+ * Generated on : 30-Oct-2026 22:18:31
+ * Version      : 1.0
+ */
+ application "Event Intelligence "
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "Asia/Kolkata"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form Event_Expenses
+		{
+			displayname = "Event Expenses"
+			success message = "Event Expense Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Events
+			(
+				type = picklist	
+				values  = Events.ID
+    			displayformat = [Event_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Expense_Category
+			(
+				type = picklist
+				displayname = "Expense Category"
+				maxchar = 100
+				values = {"Venue","Food","Marketing","Equipment","Transport","Prizes"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Total_Expenses
+			(
+				displayname = "Total Expenses"
+				type = INR
+				format = commadotindian
+				initial value = 0
+				decimalplace = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Expense_Date
+			(
+    			type = date
+				displayname = "Expense Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Description
+			(
+    			type = textarea
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Amount
+			(
+				type = INR
+				format = commadotindian
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Events
+		{
+			success message = "Event Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Event_type
+			(
+				type = picklist
+				displayname = "Event type"
+				maxchar = 100
+				values = {"Workshop","Hackathon","Seminar","Technical Event","Sport"}
+				initial value = "Workshop"
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Event_Name
+			(
+    			type = text
+				displayname = "Event Name "
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Event_Date
+			(
+    			type = date
+				displayname = "Event Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Venue
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Capacity
+			(
+				type = number
+				format = commadotwestern
+				initial value = 200
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Budget
+			(
+				type = INR
+				format = commadotwestern
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Event_Status
+			(
+				type = picklist
+				displayname = "Event Status"
+				maxchar = 100
+				values = {"Planned","Registration Open","Completed","Cancelled"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			unique Attendance_Rate
+			(
+				type = decimal
+				displayname = "Attendance Rate"
+				initial value = 0
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			unique Average_Feedback_Score
+			(
+				type = decimal
+				displayname = "Average Feedback Score"
+				initial value = 0
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Total_Expenses
+			(
+				displayname = "Total Expenses"
+				type = INR
+				format = commadotindian
+				initial value = 0
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Budget_utilization
+			(
+				type = decimal
+				initial value = 0
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Performance_Score
+			(
+				type = decimal
+				initial value = 0
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Risk_Score
+			(
+				type = decimal
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Feedback
+		{
+			success message = "Feedback Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Events
+			(
+				type = list	
+				values  = Events.ID
+    			displayformat = [Event_Name]
+				sortorder = ascending
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Participants
+			(
+				type = checkboxes	
+				values  = Participants.ID
+    			displayformat = [name]
+				searchable = true
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Overall_Rating
+			(
+				type = number
+				displayname = "Overall Rating"
+				maxchar = 5
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Content_Rating
+			(
+				type = number
+				displayname = "Content Rating"
+				maxchar = 5
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Rating1
+			(
+				type = number
+				displayname = "Speaker Rating"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Would_Recommend
+			(
+				type = picklist
+				displayname = "Would Recommend?"
+				maxchar = 100
+				values = {"Yes","No"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Comments
+			(
+    			type = textarea
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Participants
+		{
+			success message = "Participant Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Events
+			(
+				type = picklist	
+				values  = Events.ID
+    			displayformat = [Event_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have name
+			(
+    			type = text
+				displayname = "Participant Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Email
+			(
+    			type = email
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Department
+			(
+				type = picklist
+				maxchar = 100
+				values = {"CSE","AIML","AIDS","IT","ECE","EEE","MECH"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Year_of_Study
+			(
+				type = picklist
+				displayname = "Year of Study"
+				maxchar = 100
+				values = {"2","3","4"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Participants
+			(
+				type = list	
+				values  = Participants.ID
+    			displayformat = [name]
+				advanced field search = true
+				sortorder = ascending
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Registration_Date
+			(
+    			type = date
+				displayname = "Registration Date"
+				initial value = "20-Oct-2026"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Attendance_Status
+			(
+				type = picklist
+				displayname = "Attendance Status"
+				maxchar = 100
+				values = {"Registered","Attended","Absent"}
+				initial value = "Registered"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Check_in_Time
+			(
+    			type = time
+				displayname = "Check in Time"
+				initial value = "10:00:00"	
+				timedisplayoptions = "hh:mm:ss" 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		default list All_Events
+		{
+			displayName = "All Events"
+			show all rows from Events    
+			(
+				Event_Name as "Event Name "
+				Event_type as "Event type"
+				Event_Date as "Event Date"
+				Venue
+				Capacity
+				Budget
+				Event_Status as "Event Status"
+				Attendance_Rate as "Attendance Rate"
+				Average_Feedback_Score as "Average Feedback Score"
+				Total_Expenses as "Total Expenses"
+				Budget_utilization
+				Performance_Score
+				Risk_Score
+			)
+		}
+		default list All_Participants
+		{
+			displayName = "All Participants"
+			show all rows from Participants    
+			(
+				name as "Participant Name"
+				Email
+				Department
+				Year_of_Study as "Year of Study"
+				Participants
+				Registration_Date as "Registration Date"
+				Attendance_Status as "Attendance Status"
+				Check_in_Time as "Check in Time"
+				Events
+			)
+		}
+		default list All_Feedback
+		{
+			displayName = "All Feedback"
+			show all rows from Feedback    
+			(
+				Events
+				Participants
+				Overall_Rating as "Overall Rating"
+				Content_Rating as "Content Rating"
+				Rating1 as "Speaker Rating"
+				Would_Recommend as "Would Recommend?"
+				Comments
+			)
+		}
+		default list All_Event_Expenses
+		{
+			displayName = "All Event Expenses"
+			show all rows from Event_Expenses    
+			(
+				Events
+				Expense_Category as "Expense Category"
+				Total_Expenses as "Total Expenses"
+				Expense_Date as "Expense Date"
+				Description
+				Amount
+			)
+		}
+	}
+	pages
+	{
+		page Event_Intelligence_Dashboard
+		{
+			displayname = "Event Intelligence Dashboard"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t\n</layout>\n</zml>"
+		}
+		page Event_Intelligence_Dashboard1
+		{
+			displayname = "Event Intelligence Dashboard"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<gauge \n\telementName='Gauge'\n\n\tcolor = '#8A3DFB'\n\tsize = '20px'\n\tfontFamily = 'default' \n\tbgColor = '#FFFFFF'\n\ttheme = '#2A70E7'\n\tdisplayType = 'actual'\n\ttype = '1'\n\tfilledColor = '#2A70E7'\n\tnonFilledColor = '#F5F5F5'\n\tneedleColor = '#000000'\n\ttargetColor = '#D8D8D8'\n\tvalue = 'thisapp.Events.Average_Feedback_Score.avg'\n>\n<target size=\"15px\" color=\"#FF0048\" fontFamily=\"default\" value=\"\"\n/><maximumvalue size=\"15px\" color=\"#2A70E7\" value=\"5\" \n/>\n</gauge>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<gauge \n\telementName='Gauge 1'\n\n\tcolor = '#06943F'\n\tsize = '20px'\n\tfontFamily = 'default' \n\tbgColor = '#FFFFFF'\n\ttheme = '#FF3B2C'\n\tdisplayType = 'actual'\n\ttype = '1'\n\tfilledColor = '#FF3B2C'\n\tnonFilledColor = '#F5F5F5'\n\tneedleColor = '#000000'\n\ttargetColor = '#D8D8D8'\n\tvalue = 'thisapp.Events.Budget_utilization.avg'\n>\n<target size=\"15px\" color=\"#FF8318\" fontFamily=\"default\" value=\"\"\n/><maximumvalue size=\"15px\" color=\"#59DDBB\" value=\"100\" \n/>\n</gauge>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<gauge \n\telementName='Gauge 2'\n\n\tcolor = '#951FB8'\n\tsize = '20px'\n\tfontFamily = 'default' \n\tbgColor = '#FFFFFF'\n\ttheme = '#38D66D'\n\tdisplayType = 'actual'\n\ttype = '1'\n\tfilledColor = '#38D66D'\n\tnonFilledColor = '#F5F5F5'\n\tneedleColor = '#000000'\n\ttargetColor = '#D8D8D8'\n\tvalue = 'thisapp.Events.Attendance_Rate.avg'\n>\n<target size=\"15px\" color=\"#3F3F3F\" fontFamily=\"default\" value=\"\"\n/><maximumvalue size=\"15px\" color=\"#CB3B23\" value=\"100\" \n/>\n</gauge>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<gauge \n\telementName='Gauge 3'\n\n\tcolor = '#6D2FC8'\n\tsize = '20px'\n\tfontFamily = 'default' \n\tbgColor = '#FFFFFF'\n\ttheme = '#1996E8'\n\tdisplayType = 'actual'\n\ttype = '1'\n\tfilledColor = '#1996E8'\n\tnonFilledColor = '#F5F5F5'\n\tneedleColor = '#000000'\n\ttargetColor = '#D8D8D8'\n\tvalue = 'thisapp.Events.Performance_Score.avg'\n>\n<target size=\"15px\" color=\"#819BEC\" fontFamily=\"default\" value=\"\"\n/><maximumvalue size=\"15px\" color=\"#009074\" value=\"100\" \n/>\n</gauge>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<chart \n\telementName='Chart'\n\n\ttype = 'Column'\n\txtitle = 'Event Name '\n\tytitle = 'Total Expenses'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme1'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Events'\n\txfield = 'Event_Name'\n\tyfields = 'sum:Total_Expenses'\n/>\n\n</column>\n</row>\n</layout>\n</zml>"
+		}
+	}
+
+
+
+
+		workflow
+		{
+		form
+		{
+			Calculate_Attendance as "Calculate Attendance"
+			{
+				type =  form
+				form = Participants
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Count all participants registered for this event
+										registered_count = Participants[Participants == input.Participants].count();
+										// Count participants who attended
+										attended_count = Participants[Participants == input.Participants && Attendance_Status == "Attended"].count();
+										// Calculate attendance percentage
+										if(registered_count > 0)
+										{
+											attendance_rate = attended_count.toDecimal() / registered_count.toDecimal() * 100;
+										}
+										else
+										{
+											attendance_rate = 0;
+										}
+										// Update the corresponding Event
+										for each  event_record in Events[ID == input.Participants]
+										{
+											event_record.Attendance_Rate=attendance_rate;
+										}
+						)
+					}
+				}
+
+			}
+			Update_Attendance as "Update Attendance"
+			{
+				type =  form
+				form = Participants
+
+				record event = on edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											registered_count = Participants[Participants == input.Participants].count();
+										attended_count = Participants[Participants == input.Participants && Attendance_Status == "Attended"].count();
+										if(registered_count > 0)
+										{
+											attendance_rate = attended_count.toDecimal() / registered_count.toDecimal() * 100;
+										}
+										else
+										{
+											attendance_rate = 0;
+										}
+										for each  event_record in Events[ID == input.Participants]
+										{
+											event_record.Attendance_Rate=attendance_rate;
+										}
+						)
+					}
+				}
+
+			}
+			Update_Attendance_after_e as "Update Attendance after editing"
+			{
+				type =  form
+				form = Participants
+
+				record event = on delete
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											registered_count = Participants[Participants == input.Participants].count();
+										attended_count = Participants[Participants == input.Participants && Attendance_Status == "Attended"].count();
+										if(registered_count > 0)
+										{
+											attendance_rate = attended_count.toDecimal() / registered_count.toDecimal() * 100;
+										}
+										else
+										{
+											attendance_rate = 0;
+										}
+										for each  event_record in Events[ID == input.Participants]
+										{
+											event_record.Attendance_Rate=attendance_rate;
+										}
+						)
+					}
+				}
+
+			}
+			Calculate_Feedback_Score as "Calculate Feedback Score"
+			{
+				type =  form
+				form = Feedback
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											feedback_count = Feedback[Events == input.Events].count();
+										event_id = input.Events.get(0);
+										feedback_records = Feedback[Events == event_id];
+										feedback_count = feedback_records.count();
+										average_rating = 0;
+										if(feedback_count > 0)
+										{
+											total_rating = 0;
+											for each  feedback_record in feedback_records
+											{
+												total_rating = total_rating + ifnull(feedback_record.Overall_Rating,0);
+											}
+											average_rating = total_rating.toDecimal() / feedback_count.toDecimal();
+										}
+										for each  event_record in Events[ID == event_id]
+										{
+											event_record.Average_Feedback_Score=average_rating;
+										}
+						)
+					}
+				}
+
+			}
+			Calculate_Total_Expenses as "Calculate Total Expenses"
+			{
+				type =  form
+				form = Event_Expenses
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											event_id = input.Events;
+										total_expenses = 0;
+										for each  expense_record in Event_Expenses[Events == event_id]
+										{
+											total_expenses = total_expenses + ifnull(expense_record.Amount,0);
+										}
+										for each  event_record in Events[ID == event_id]
+										{
+											event_record.Total_Expenses=total_expenses;
+										}
+						)
+					}
+				}
+
+			}
+			Calculate_Event_Intellige as "Calculate Event Intelligence"
+			{
+				type =  form
+				form = Events
+
+				record event = on add or edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Get current event values
+										budget = ifnull(input.Budget,0);
+										expenses = ifnull(input.Total_Expenses,0);
+										attendance = ifnull(input.Attendance_Rate,0);
+										feedback = ifnull(input.Average_Feedback_Score,0);
+										// Calculate Budget Utilization
+										budget_utilization = 0;
+										if(budget > 0)
+										{
+											budget_utilization = expenses.toDecimal() / budget.toDecimal() * 100;
+										}
+										// Calculate Performance Score
+										performance_score = attendance.toDecimal() * 0.5 + feedback.toDecimal() / 5 * 100 * 0.5;
+										// Calculate Risk Score
+										risk_score = 0;
+										if(budget_utilization > 90)
+										{
+											risk_score = risk_score + 40;
+										}
+										else if(budget_utilization > 75)
+										{
+											risk_score = risk_score + 20;
+										}
+										if(attendance < 50)
+										{
+											risk_score = risk_score + 30;
+										}
+										else if(attendance < 70)
+										{
+											risk_score = risk_score + 15;
+										}
+										if(feedback < 3)
+										{
+											risk_score = risk_score + 30;
+										}
+										else if(feedback < 4)
+										{
+											risk_score = risk_score + 15;
+										}
+										// Update intelligence fields
+										input.Budget_utilization = budget_utilization;
+										input.Performance_Score = performance_score;
+										input.Risk_Score = risk_score;
+						)
+					}
+				}
+
+			}
+			Calculate_Attendance_Rate as "Calculate Attendance Rate"
+			{
+				type =  form
+				form = Participants
+
+				record event = on add or edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											event_id = input.Events;
+										registered_count = Participants[Events == event_id].count();
+										attended_count = Participants[Events == event_id && Attendance_Status == "Attended"].count();
+										attendance_rate = 0;
+										if(registered_count > 0)
+										{
+											attendance_rate = attended_count.toDecimal() / registered_count.toDecimal() * 100;
+										}
+										for each  event_record in Events[ID == event_id]
+										{
+											event_record.Attendance_Rate=attendance_rate;
+										}
+						)
+					}
+				}
+
+			}
+		}
+
+
+
+
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+				}
+			}
+	}
+
+	customize
+	{
+		icon
+		{
+			text = "EI"
+			background color = "theme"
+			foreground color = "#ffffff"
+		}
+	}
+
+	web
+	{
+		forms
+		{
+			form Event_Expenses
+			{
+				label placement = left
+			}
+			form Events
+			{
+				label placement = left
+			}
+			form Feedback
+			{
+				label placement = left
+			}
+			form Participants
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report All_Events
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Event_Name as "Event Name "
+								Event_type as "Event type"
+								Event_Date as "Event Date"
+								Venue
+								Capacity
+								Budget
+								Event_Status as "Event Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Event_Name as "Event Name "
+								Event_type as "Event type"
+								Event_Date as "Event Date"
+								Venue
+								Capacity
+								Budget
+								Event_Status as "Event Status"
+								Attendance_Rate as "Attendance Rate"
+								Average_Feedback_Score as "Average Feedback Score"
+								Total_Expenses as "Total Expenses"
+								Budget_utilization
+								Performance_Score
+								Risk_Score
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Participants
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								name as "Participant Name"
+								Email
+								Department
+								Year_of_Study as "Year of Study"
+								Participants
+								Registration_Date as "Registration Date"
+								Attendance_Status as "Attendance Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								name as "Participant Name"
+								Email
+								Department
+								Year_of_Study as "Year of Study"
+								Participants
+								Registration_Date as "Registration Date"
+								Attendance_Status as "Attendance Status"
+								Check_in_Time as "Check in Time"
+								Events
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Feedback
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Events
+								Participants
+								Overall_Rating as "Overall Rating"
+								Content_Rating as "Content Rating"
+								Rating1 as "Speaker Rating"
+								Would_Recommend as "Would Recommend?"
+								Comments
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Events
+								Participants
+								Overall_Rating as "Overall Rating"
+								Content_Rating as "Content Rating"
+								Rating1 as "Speaker Rating"
+								Would_Recommend as "Would Recommend?"
+								Comments
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Event_Expenses
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Events
+								Expense_Category as "Expense Category"
+								Total_Expenses as "Total Expenses"
+								Expense_Date as "Expense Date"
+								Description
+								Amount
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Events
+								Expense_Category as "Expense Category"
+								Total_Expenses as "Total Expenses"
+								Expense_Date as "Expense Date"
+								Description
+								Amount
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Events
+				{
+					displayname = "Events"
+					icon = "ui-1-calendar-grid-58"
+					form  Events
+					{
+						icon = "ui-1-calendar-grid-58"
+					}
+					report All_Events
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+				section Participants
+				{
+					displayname = "Participants"
+					icon = "business-board-27"
+					form  Participants
+					{
+						icon = "business-board-27"
+					}
+					report All_Participants
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Feedback
+				{
+					displayname = "Feedback"
+					icon = "tech-keyboard"
+					form  Feedback
+					{
+						icon = "tech-keyboard"
+					}
+					report All_Feedback
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Event_Expenses
+				{
+					displayname = "Event Expenses"
+					icon = "ui-1-calendar-grid-58"
+					form  Event_Expenses
+					{
+						icon = "ui-1-calendar-grid-58"
+					}
+					report All_Event_Expenses
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Event_Intelligence_Dashboard
+				{
+					displayname = "Event Intelligence Dashboard"
+					icon = "tech-2-l-security"
+					page Event_Intelligence_Dashboard
+					{
+						icon = "tech-2-l-security"
+					}
+					page Event_Intelligence_Dashboard1
+					{
+						icon = "tech-2-l-security"
+					}
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+				}
+			}
+		}
+		customize
+		{
+			font = "lato"
+			color options
+			{
+				color = "11"
+			}
+			logo
+			{
+				preference = "app_icon"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form Event_Expenses
+			{
+				label placement = auto
+			}
+			form Events
+			{
+				label placement = auto
+			}
+			form Feedback
+			{
+				label placement = auto
+			}
+			form Participants
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = twocolumn
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = chryslerpurple
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form Event_Expenses
+			{
+				label placement = auto
+			}
+			form Events
+			{
+				label placement = auto
+			}
+			form Feedback
+			{
+				label placement = auto
+			}
+			form Participants
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = rose
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	
+}
